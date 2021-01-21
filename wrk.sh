@@ -6,12 +6,11 @@ THREAD=$1
 CUNCURENT=$2
 TW=$3
 RT=$4
-TIMEOUT=5
-UA=
+UA="wrk2"
 DATE=`date "+%Y%m%d%H%M%S"`
 URL="http://<YOUR TARGET>"
 PROXY="http://<YOUR PROXY>:8080"
 FILE="/var/tmp/result_$DATE\.txt"
 
 cd $DIR
-$ECHO ./wrk -t${THREAD} -c${CUNCURENT} -d${TW}s -R${RT} -H"User-Agent: SampleTools" --latency --timeout ${TIMEOUT} ${PROXY} -s scripts/proxy.lua -- ${URL} >& ${FILE}
+$ECHO ./wrk -t${THREAD} -c${CUNCURENT} -d${TW}s -R${RT} -H"User-Agent: ${UA}" --latency ${PROXY} -s scripts/proxy.lua -- ${URL} >& ${FILE}
